@@ -9,6 +9,7 @@ var GpxViz = React.createClass({
     },
 
     componentDidMount: function() {
+        console.log(this.props.data);
         var el = ReactDOM.findDOMNode(this);
         d3GpxViz.create(el, {
             width: '100%',
@@ -23,9 +24,25 @@ var GpxViz = React.createClass({
         };
     },
 
+    exportData: function() {
+      console.log(ReactDOM.findDOMNode(this));
+    },
+
     render: function() {
-        return ( <div className="GpxViz">
-          <p>{this.props.time[0]}</p>
+        var style = {
+          color : 'black'
+        };
+        return (
+        <div className="GpxViz">
+          <p>Time Started: {this.props.data[0].time}</p>
+          <p>Time Ended: {this.props.data[this.props.data.length - 1].time}</p>
+          //TODO display corresponding values
+          <p>Distance: </p>
+          <p>Lowest Elevation: </p>
+          <p>Highest Elevation: </p>
+          <p>Total elevation gain: </p>
+          <p>{this.props.data.name}</p>
+          <button onClick={this.exportData}>Export</button>
         </div>);
     }
 });

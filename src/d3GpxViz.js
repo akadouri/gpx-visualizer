@@ -30,6 +30,8 @@ d3GpxViz._drawPoints = function(el, scales, data) {
             lonHi = data[i].lon;
         }
     }
+    console.log("latLow: " + latLow + " latHi: " + latHi + " lonLow: " +
+        lonLow + " lonHi: " + lonHi);
 
     var svg = d3.select(el)
         .append("svg")

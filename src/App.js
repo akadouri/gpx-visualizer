@@ -12,6 +12,7 @@ class App extends React.Component {
     handleData(e) {
         var reader = new FileReader();
         reader.addEventListener("load", parseFile.bind(this), false);
+        console.log(e);
         reader.readAsText(e.target.files[0]);
         var data = this.state.data;
         var maps = [];
@@ -20,17 +21,16 @@ class App extends React.Component {
                 var obj = [];
                 obj.lat = $(this).attr('lat');
                 obj.lon = $(this).attr('lon');
-                maps.push(obj);
+                obj.ele = $(this).find('ele').text();
+                obj.time = $(this).find('time').text();
+                if(obj.lat != 0 && obj.lon != 0) { //no one is running in the Gulf of Guinea
+                  maps.push(obj);
+                }
             });
-            var time = [];
-            $(reader.result).find('time').each(function(index) {
-                time.push($(this).text());
-            });
-            maps.time = time;
+            maps.name = $(reader.result).find('name').text();
             data.push(maps);
             this.setState({data: data});
         }
-        console.log("data.length: " + data.length);
     }
     render() {
         return (
@@ -39,7 +39,7 @@ class App extends React.Component {
               <br/>
               <input type="file" onChange={this.handleData} />
               {this.state.data.map(function(gpx) {
-                  return <GpxViz key={gpx.time[0]} time={gpx.time} data={gpx}/>
+                  return <GpxViz key={gpx[0].time} data={gpx}/>
               })}
             </div>
         );

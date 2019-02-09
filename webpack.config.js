@@ -8,7 +8,7 @@ module.exports = {
     },
     module: {
         loaders: [{
-            //tell webpack to use jsx-loader for all *.jsx files
+            //tell webpack to use babel-loader for all *js, *.jsx files
             test: /\.jsx?$/,
             loader: 'babel-loader',
             exclude: /node_modules/,
